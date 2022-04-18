@@ -3,6 +3,7 @@ Flutter and MVVM
 
 ## Getting Started
 `flutter pub get`
+
 `flutter pub run build_runner build`
 
 ## Document
@@ -19,12 +20,12 @@ Flutter and MVVM
 - Lib: https://pub.dev/packages/easy_localization
 - Suggest settings: `useOnlyLangCode: true`
 - IOS need add to **Info.plist**
+  ```
   <key>CFBundleLocalizations</key>
   <array>
   <string>en</string>
   <string>ja</string>
   </array>
-  
 ## Important Libraries
 - auto_route: Declarative routing solution, automatically generated.
 - provider: Statement Manager.
