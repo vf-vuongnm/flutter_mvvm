@@ -1,0 +1,8 @@
+{
+  "login":"Login",
+  "loading": "Loading",
+  "home": "Home",
+  "profile": "Profile",
+  "logout": "Logout",
+  "goToProfile": "Go to Profile"
+}
