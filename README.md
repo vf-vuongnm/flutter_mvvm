@@ -33,3 +33,8 @@ Flutter and MVVM
 ## Build and release
 - Android: https://docs.flutter.dev/deployment/android
 - iOS: https://docs.flutter.dev/deployment/ios
+
+## Regular bugs
+- Timeout waiting to lock journal cache. It is currently in use by another Gradle instance.
+
+  `find ~/.gradle -type f -name "*.lock" -delete`
