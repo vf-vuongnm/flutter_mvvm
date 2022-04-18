@@ -47,13 +47,14 @@ class __LoginBodyState extends State<_LoginBody> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Container(
-                  width: 100,
-                  height: 100,
+                  width: 150,
+                  height: 150,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
+                      fit: BoxFit.fill,
                       image: AssetImage(
-                          "assets/images/logo.png"
+                          "assets/images/image_example.png"
                       )
                     )
                   )
