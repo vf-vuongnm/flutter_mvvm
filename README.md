@@ -12,7 +12,8 @@ Flutter and MVVM
 ## Assets
 - For only android -> need **1x**, **1.5x**(WVGA), **2x**(HD), **3x**(fullHD), **3.5x**(2K) folders
 - For only ios -> need **1x**, **2x**(Ipads, Iphone 6,7,8,XR), **3x**(Iphone X, XS...) folders
-- For android and ios -> need **1x**, **1.5x**(WVGA), **2x**(HD), **3x**(fullHD), **3.5x**(2K) folders
+
+  => For android and ios -> need **1x**, **1.5x**, **2x**, **3x**, **3.5x** folders
 
 ## Localizations
 - Lib: https://pub.dev/packages/easy_localization
