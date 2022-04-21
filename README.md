@@ -6,6 +6,9 @@ Flutter and MVVM
 
 `flutter pub run build_runner build`
 
+## IDE
+- Android Studio
+
 ## Document
 - MVVM: https://www.raywenderlich.com/6373413-state-management-with-provider
 - Statement Manager: Provider - https://www.youtube.com/watch?v=d_m5csmrf7I
