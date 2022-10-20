@@ -88,7 +88,7 @@ class __LoginBodyState extends State<_LoginBody> {
                 final password = passwordController.value.text;
                 final isAuth = await viewModel.login(username, password);
                 if(isAuth) {
-                  AutoRouter.of(context).replace(const HomeScreen());
+                  _onLoginSuccess();
                 }
               },
             ),
@@ -98,5 +98,9 @@ class __LoginBodyState extends State<_LoginBody> {
         ),
       ),
     );
+  }
+
+  _onLoginSuccess() {
+    AutoRouter.of(context).replace(const HomeScreen());
   }
 }

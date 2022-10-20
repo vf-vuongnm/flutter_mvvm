@@ -9,7 +9,7 @@ class LoadingContainer extends StatefulWidget {
   final Widget _child;
   final bool _isLoading;
   @override
-  _LoadingContainerState createState() {
+  State<LoadingContainer> createState() {
     return _LoadingContainerState();
   }
 }

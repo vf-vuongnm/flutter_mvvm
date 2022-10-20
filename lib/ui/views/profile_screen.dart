@@ -33,7 +33,7 @@ class _ProfileBodyState extends State<ProfileBody> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<ProfileScreenViewModel>().getProfile();
     });
   }
@@ -71,7 +71,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                       child: const Text("logout").tr(),
                       onPressed: () async {
                         await viewModel.logout();
-                        AutoRouter.of(context).replaceAll([const SplashScreen()]);
+                        _onLogoutCompleted();
                       }
                   ),
                 ],
@@ -82,5 +82,9 @@ class _ProfileBodyState extends State<ProfileBody> {
         ),
       ),
     );
+  }
+
+  _onLogoutCompleted() {
+    AutoRouter.of(context).replaceAll([const SplashScreen()]);
   }
 }
