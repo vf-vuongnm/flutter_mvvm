@@ -13,13 +13,6 @@ class LoginScreenViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  bool _isLoginRequesting = false;
-  bool get isLoginRequesting => _isLoginRequesting;
-  set isLoginRequesting(bool value) {
-    _isLoginRequesting = value;
-    notifyListeners();
-  }
-
   bool _readyForLogin = false;
   bool get readyForLogin => _readyForLogin;
   set readyForLogin(bool value) {
@@ -33,13 +26,11 @@ class LoginScreenViewModel with ChangeNotifier {
       return false;
     }
 
-    isLoginRequesting = true;
     errorMessage = '';
     final loginResult = await _userService.login(username, password);
     if(!loginResult.isSuccess) {
       errorMessage = loginResult.message;
     }
-    isLoginRequesting = false;
     return loginResult.isSuccess;
   }
 

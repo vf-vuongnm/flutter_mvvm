@@ -1,6 +1,6 @@
 import 'package:mvvm/business_logic/view_models/login_screen_view_model.dart';
+import 'package:mvvm/shared/common_dialog.dart';
 import 'package:mvvm/ui/router/app_router.gr.dart';
-import 'package:mvvm/ui/views/widgets/loading_container.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,12 +12,12 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('login').tr(),
-      ),
-      body: const SafeArea(
-          child: _LoginBody()
-      ),
+        appBar: AppBar(
+          title: const Text('login').tr(),
+        ),
+        body: const SafeArea(
+          child: _LoginBody(),
+        )
     );
   }
 }
@@ -36,42 +36,39 @@ class __LoginBodyState extends State<_LoginBody> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<LoginScreenViewModel>();
-
-    return LoadingContainer(
-      isLoading: viewModel.isLoginRequesting,
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Container(
-                    width: 100,
-                    height: 100,
-                    decoration: const BoxDecoration(
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Container(
+                  width: 100,
+                  height: 100,
+                  decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: AssetImage(
-                            "assets/images/image_example.png"
-                        )
+                          fit: BoxFit.fill,
+                          image: AssetImage(
+                              "assets/images/image_example.png"
+                          )
                       )
-                    )
-                ),
+                  )
               ),
-              TextField(
-                controller: usernameController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Username',
-                ),
-                autocorrect: false,
-                enableSuggestions: false,
-                onChanged: _onLoginInputsChange,
+            ),
+            TextField(
+              controller: usernameController,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Username',
               ),
-              const SizedBox(height: 16,),
-              TextField(
+              autocorrect: false,
+              enableSuggestions: false,
+              onChanged: _onLoginInputsChange,
+            ),
+            const SizedBox(height: 16,),
+            TextField(
                 controller: passwordController,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
@@ -81,30 +78,31 @@ class __LoginBodyState extends State<_LoginBody> {
                 autocorrect: false,
                 enableSuggestions: false,
                 onChanged: _onLoginInputsChange
-              ),
-              const SizedBox(height: 16,),
-              ElevatedButton(
-                onPressed: !viewModel.readyForLogin ? null : () async {
-                  final username = usernameController.value.text;
-                  final password = passwordController.value.text;
-                  final isAuth = await viewModel.login(username, password);
-                  if(isAuth) {
-                    _onLoginSuccess();
-                  }
-                },
-                child: const Text("login").tr(),
-              ),
-              const SizedBox(height: 16,),
-              Text(viewModel.errorMessage, style: Theme.of(context).textTheme.subtitle2?.copyWith(color: Colors.redAccent),),
-            ],
-          ),
+            ),
+            const SizedBox(height: 16,),
+            ElevatedButton(
+              onPressed: !viewModel.readyForLogin ? null : () async {
+                final username = usernameController.value.text;
+                final password = passwordController.value.text;
+                CommonDialog.showLoadingDialog(context);
+                final isAuth = await viewModel.login(username, password);
+                _onLoginCompleted(isAuth);
+              },
+              child: const Text("login").tr(),
+            ),
+            const SizedBox(height: 16,),
+            Text(viewModel.errorMessage, style: Theme.of(context).textTheme.subtitle2?.copyWith(color: Colors.redAccent),),
+          ],
         ),
       ),
     );
   }
 
-  _onLoginSuccess() {
-    AutoRouter.of(context).replace(const HomeScreen());
+  _onLoginCompleted(bool isAuth) {
+    CommonDialog.closeVisibleDialog(context);
+    if(isAuth) {
+      AutoRouter.of(context).replace(const HomeScreen());
+    }
   }
 
   _onLoginInputsChange(String? _) {
