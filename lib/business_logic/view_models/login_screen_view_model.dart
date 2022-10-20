@@ -20,6 +20,13 @@ class LoginScreenViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  bool _readyForLogin = false;
+  bool get readyForLogin => _readyForLogin;
+  set readyForLogin(bool value) {
+    _readyForLogin = value;
+    notifyListeners();
+  }
+
   Future<bool> login(String username, String password) async {
     if(username.isEmpty || password.isEmpty) {
       errorMessage = 'Username or password is empty';
@@ -34,5 +41,9 @@ class LoginScreenViewModel with ChangeNotifier {
     }
     isLoginRequesting = false;
     return loginResult.isSuccess;
+  }
+
+  onLoginInputsChanged(String username, String password) {
+    readyForLogin = username.isNotEmpty && password.isNotEmpty;
   }
 }

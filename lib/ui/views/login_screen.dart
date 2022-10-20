@@ -31,7 +31,7 @@ class _LoginBody extends StatefulWidget {
 
 class __LoginBodyState extends State<_LoginBody> {
   final usernameController = TextEditingController(text: "eve.holt@reqres.in");
-  final passwordController = TextEditingController(text: "cityslicka");
+  final passwordController = TextEditingController(text: "");
 
   @override
   Widget build(BuildContext context) {
@@ -39,62 +39,65 @@ class __LoginBodyState extends State<_LoginBody> {
 
     return LoadingContainer(
       isLoading: viewModel.isLoginRequesting,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Container(
-                  width: 150,
-                  height: 150,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage(
-                          "assets/images/image_example.png"
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                    width: 100,
+                    height: 100,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage(
+                            "assets/images/image_example.png"
+                        )
                       )
                     )
-                  )
+                ),
               ),
-            ),
-            TextField(
-              controller: usernameController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Username',
+              TextField(
+                controller: usernameController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Username',
+                ),
+                autocorrect: false,
+                enableSuggestions: false,
+                onChanged: _onLoginInputsChange,
               ),
-              autocorrect: false,
-              enableSuggestions: false,
-            ),
-            const SizedBox(height: 16,),
-            TextField(
-              controller: passwordController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Password',
+              const SizedBox(height: 16,),
+              TextField(
+                controller: passwordController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Password',
+                ),
+                obscureText: true,
+                autocorrect: false,
+                enableSuggestions: false,
+                onChanged: _onLoginInputsChange
               ),
-              obscureText: true,
-              autocorrect: false,
-              enableSuggestions: false,
-            ),
-            const SizedBox(height: 16,),
-            ElevatedButton(
-              child: const Text("login").tr(),
-              onPressed: () async {
-                final username = usernameController.value.text;
-                final password = passwordController.value.text;
-                final isAuth = await viewModel.login(username, password);
-                if(isAuth) {
-                  _onLoginSuccess();
-                }
-              },
-            ),
-            const SizedBox(height: 16,),
-            Text(viewModel.errorMessage, style: Theme.of(context).textTheme.subtitle2?.copyWith(color: Colors.redAccent),),
-          ],
+              const SizedBox(height: 16,),
+              ElevatedButton(
+                onPressed: !viewModel.readyForLogin ? null : () async {
+                  final username = usernameController.value.text;
+                  final password = passwordController.value.text;
+                  final isAuth = await viewModel.login(username, password);
+                  if(isAuth) {
+                    _onLoginSuccess();
+                  }
+                },
+                child: const Text("login").tr(),
+              ),
+              const SizedBox(height: 16,),
+              Text(viewModel.errorMessage, style: Theme.of(context).textTheme.subtitle2?.copyWith(color: Colors.redAccent),),
+            ],
+          ),
         ),
       ),
     );
@@ -102,5 +105,9 @@ class __LoginBodyState extends State<_LoginBody> {
 
   _onLoginSuccess() {
     AutoRouter.of(context).replace(const HomeScreen());
+  }
+
+  _onLoginInputsChange(String? _) {
+    context.read<LoginScreenViewModel>().onLoginInputsChanged(usernameController.text, passwordController.text);
   }
 }
