@@ -1,13 +1,13 @@
-import 'package:realm/realm.dart';
+import 'package:floor/floor.dart';
 
-part 'storage_user.g.dart';
-
-@RealmModel()
-class _StorageUser {
-  @PrimaryKey()
+@entity
+class StorageUser {
+  @primaryKey
   late final int id;
   String? email;
   String? firstName;
   String? lastName;
   String? avatar;
+
+  StorageUser(this.id, this.email, this.firstName, this.lastName, this.avatar);
 }

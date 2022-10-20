@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:mvvm/business_logic/view_models/login_screen_view_model.dart';
 import 'package:mvvm/business_logic/view_models/profile_screen_view_model.dart';
 import 'package:mvvm/global/app_theme.dart';
-import 'package:mvvm/repositories/service_locator.dart';
 import 'package:mvvm/repositories/web_api/utils/rest_client.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -18,8 +17,6 @@ final restClient = RestClient(Dio());
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-
-  setupServiceLocator();
 
   runApp(
     MultiProvider(

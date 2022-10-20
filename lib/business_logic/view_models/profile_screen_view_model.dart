@@ -1,12 +1,11 @@
 import 'dart:async';
 
 import 'package:mvvm/business_logic/presentations/user_presentation.dart';
-import 'package:mvvm/repositories/service_locator.dart';
 import 'package:mvvm/repositories/services/user/user_service.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreenViewModel with ChangeNotifier {
-  final UserService _userService = serviceLocator<UserService>();
+  final UserService _userService = UserService();
 
   String _errorMessage = '';
   String get errorMessage => _errorMessage;
