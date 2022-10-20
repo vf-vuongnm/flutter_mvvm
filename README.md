@@ -9,6 +9,12 @@ Flutter and MVVM
 ## IDE
 - Android Studio
 
+## DART
+flutter upgrade --force
+
+## Gradle kill
+find ~/.gradle -type f -name "*.lock" -delete
+
 ## Document
 - MVVM: https://www.raywenderlich.com/6373413-state-management-with-provider
 - Statement Manager: Provider - https://www.youtube.com/watch?v=d_m5csmrf7I
@@ -28,7 +34,7 @@ Flutter and MVVM
   <array>
   <string>en</string>
   <string>ja</string>
-  </array>
+  </array>Up
 ## Important Libraries
 - auto_route: Declarative routing solution, automatically generated.
 - provider: Statement Manager.
