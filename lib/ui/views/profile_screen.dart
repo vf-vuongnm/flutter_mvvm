@@ -1,3 +1,4 @@
+import 'package:mvvm/business_logic/view_models/global_view_model.dart';
 import 'package:mvvm/business_logic/view_models/profile_screen_view_model.dart';
 import 'package:mvvm/shared/common_dialog.dart';
 import 'package:mvvm/ui/router/app_router.gr.dart';
@@ -74,6 +75,28 @@ class _ProfileBodyState extends State<ProfileBody> {
                       _onLogoutCompleted();
                     }
                 ),
+                const SizedBox(height: 16,),
+                ElevatedButton(
+                  onPressed: () async {
+                    context.read<GlobalViewModel>().saveLanguage("ja");
+                  },
+                  child: const Text("Change to Japanese"),
+                ),
+                const SizedBox(height: 16,),
+                ElevatedButton(
+                  onPressed: () async {
+                    context.read<GlobalViewModel>().saveLanguage("en");
+                  },
+                  child: const Text("Change to English"),
+                ),
+                const SizedBox(height: 16,),
+                ElevatedButton(
+                  onPressed: () async {
+                    context.read<GlobalViewModel>().saveLanguage("ur");
+                  },
+                  child: const Text("Change to Urdu"),
+                ),
+
               ],
             ),
           if(viewModel.errorMessage.isNotEmpty)

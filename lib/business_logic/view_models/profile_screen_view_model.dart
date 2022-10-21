@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:mvvm/business_logic/presentations/user_presentation.dart';
-import 'package:mvvm/repositories/services/user/user_service.dart';
+import 'package:mvvm/repositories/services/services/user_service.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreenViewModel with ChangeNotifier {

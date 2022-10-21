@@ -1,12 +1,12 @@
 import 'package:mvvm/repositories/services/entities/user.dart';
 import 'package:mvvm/repositories/web_api/utils/request_result.dart';
 import 'package:mvvm/repositories/storage/entities/storage_user.dart';
-import 'package:mvvm/repositories/storage/user/user_storage_service.dart';
+import 'package:mvvm/repositories/storage/services/user_storage_service.dart';
 import 'package:mvvm/repositories/web_api/entities/api_user.dart';
-import 'package:mvvm/repositories/web_api/user/user_web_api.dart';
+import 'package:mvvm/repositories/web_api/services/user_web_api_service.dart';
 
 class UserService{
-  final UserWebApi _webApi = UserWebApi();
+  final UserWebApiService _webApiService = UserWebApiService();
   final UserStorageService _storageService = UserStorageService();
 
   Future<User?> getProfile() async {
@@ -17,7 +17,7 @@ class UserService{
       return user;
     }
 
-    var getProfileResult = await _webApi.getProfile();
+    var getProfileResult = await _webApiService.getProfile();
 
     if(getProfileResult.isSuccess) {
       final apiUser = getProfileResult.data as ApiUser;
@@ -33,7 +33,7 @@ class UserService{
   }
 
   Future<RequestResult> login(String username, String password) async {
-    final loginResult = await _webApi.login(username, password);
+    final loginResult = await _webApiService.login(username, password);
 
     if (loginResult.isSuccess) {
       final token = loginResult.data as String;

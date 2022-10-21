@@ -1,9 +1,8 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:mvvm/main.dart';
 import 'package:mvvm/repositories/storage/database/database.dart';
 import 'package:mvvm/repositories/storage/entities/storage_user.dart';
 import 'package:mvvm/shared/extensions.dart';
-
-const secureStorage = FlutterSecureStorage();
 
 class UserStorageService {
   Future<AppDatabase> getDatabase() {

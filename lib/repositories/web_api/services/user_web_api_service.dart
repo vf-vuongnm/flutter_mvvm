@@ -3,8 +3,7 @@ import 'package:mvvm/main.dart';
 import 'package:mvvm/repositories/web_api/utils/rest_error.dart';
 import 'package:dio/dio.dart';
 
-
-class UserWebApi{
+class UserWebApiService{
   Future<RequestResult> login(String username, String password) async {
     final Map<String, String> loginBody = {
       'username': username,
